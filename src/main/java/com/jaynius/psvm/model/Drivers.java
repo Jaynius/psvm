@@ -3,10 +3,10 @@ package com.jaynius.psvm.model;
 import java.sql.Blob;
 import java.util.Date;
 
-import com.jaynius.psvm.model.PsVehicle;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +21,8 @@ public class Drivers {
 	private String firstName,secondName;
 	private Date dob;
 	private Blob picture;
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	private PsVehicle vehicle;
 	public String getIdNumber() {
 		return idNumber;
@@ -58,6 +60,7 @@ public class Drivers {
 	public void setVehicle(PsVehicle vehicle) {
 		this.vehicle = vehicle;
 	}
+	
 	
 	
 	}
