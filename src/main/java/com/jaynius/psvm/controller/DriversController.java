@@ -26,7 +26,7 @@ public class DriversController {
 	public ResponseEntity<Drivers> addDriver(@RequestBody Drivers driver){
 		return service.addDriver(driver);
 	}
-	@GetMapping(path="/driver{idNumber")
+	@GetMapping(path="/driver{idNumber}")
 	public ResponseEntity<Drivers> getDriverbyId(@PathVariable String idNumber){
 		return service.getDriverById(idNumber);
 	}
