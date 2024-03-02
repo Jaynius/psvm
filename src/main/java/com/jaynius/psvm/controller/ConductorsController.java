@@ -35,8 +35,8 @@ public class ConductorsController {
 	}
 	
 	@GetMapping("/conductor/{conductorNo}")
-	public ResponseEntity<Conductors> getbyConductorId(@PathVariable Long conductorNo){
-		return service.findById(conductorNo);
+	public ResponseEntity<Conductors> getbyConductorId(@PathVariable String idNumber){
+		return service.findById(idNumber);
 	}
 	@GetMapping("/conductor/{vehicleRegistration}")
 	public ResponseEntity<Conductors> getByVehicleRegistration(@PathVariable String vRegNo){
@@ -44,13 +44,13 @@ public class ConductorsController {
 	}
 	
 	@PostMapping("/conductor/{conductorNo}")
-	public ResponseEntity<Conductors> updatebyConductorId(@PathVariable Long conductorNo,
+	public ResponseEntity<Conductors> updatebyConductorId(@PathVariable String idNumber,
 			@RequestBody Conductors conductor){
-		return service.updateById(conductorNo, conductor);
+		return service.updateById(idNumber, conductor);
 		
 	}
 	@DeleteMapping("/conductor/{conductorNo}")
-	public ResponseEntity<Conductors> deleteByConductorId(@PathVariable Long conductorNo){
-		return service.deleteById(conductorNo);
+	public ResponseEntity<Conductors> deleteByConductorId(@PathVariable String  idNumber){
+		return service.deleteById(idNumber);
 	}
 }

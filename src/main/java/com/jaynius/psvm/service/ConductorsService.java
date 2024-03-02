@@ -10,10 +10,10 @@ import com.jaynius.psvm.model.Conductors;
 @Service
 public interface ConductorsService {
 	public ResponseEntity<Conductors> addConductor(Conductors conductor);
-	public ResponseEntity<Conductors> updateById( Long conductorNo,Conductors newConductor);
-	public ResponseEntity<Conductors> findById(Long conductorNo);
-	public ResponseEntity<Conductors> deleteById(Long conductorNo);
+	public ResponseEntity<Conductors> updateById( String idNumber,Conductors newConductor);
+	public ResponseEntity<Conductors> findById(String idNumber);
 	public ResponseEntity<List<Conductors>> findAll();
 	public ResponseEntity<Conductors> findByVehicleNumber(String vRegNo);
+	public ResponseEntity<Conductors> deleteById(String idNumber);
 }
 

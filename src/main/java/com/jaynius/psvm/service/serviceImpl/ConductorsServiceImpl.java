@@ -33,8 +33,8 @@ public class ConductorsServiceImpl implements ConductorsService{
 	}
 
 	@Override
-	public ResponseEntity<Conductors> updateById(Long conductorNo, Conductors newConductor) {
-		Optional<Conductors> existingConductor=repo.findById(conductorNo);
+	public ResponseEntity<Conductors> updateById(String idNumber, Conductors newConductor) {
+		Optional<Conductors> existingConductor=repo.findById(idNumber);
 			if(existingConductor.isPresent()) {
 			Conductors	updatedConductor=existingConductor.get();
 			updatedConductor.setContacts(newConductor.getContacts());
@@ -60,9 +60,9 @@ public class ConductorsServiceImpl implements ConductorsService{
 	}
 
 	@Override
-	public ResponseEntity<Conductors> findById(Long conductorNo) {
+	public ResponseEntity<Conductors> findById(String idNumber) {
 		// TODO Auto-generated method stub
-		Optional<Conductors> conductor=repo.findById(conductorNo);
+		Optional<Conductors> conductor=repo.findById(idNumber);
 		if(conductor.isPresent()) {
 			return new ResponseEntity<>(conductor.get(),HttpStatus.FOUND);
 			
@@ -73,10 +73,10 @@ public class ConductorsServiceImpl implements ConductorsService{
 	}
 
 	@Override
-	public ResponseEntity<Conductors> deleteById(Long conductorNo) {
-		 Optional<Conductors> conductorOptional = repo.findById(conductorNo);
+	public ResponseEntity<Conductors> deleteById(String idNumber) {
+		 Optional<Conductors> conductorOptional = repo.findById(idNumber);
 	        if (conductorOptional.isPresent()) {
-	            repo.deleteById(conductorNo);
+	            repo.deleteById(idNumber);
 	            return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
 	        } else {
 	            return new ResponseEntity<>( HttpStatus.NOT_FOUND); 
