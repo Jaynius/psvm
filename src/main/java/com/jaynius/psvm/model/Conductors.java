@@ -5,6 +5,7 @@ import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +28,7 @@ public class Conductors {
 	private Date dob;
 	private Blob picture;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER)
 	private PsVehicle vehicle;
 
 	public String getIdNumber() {

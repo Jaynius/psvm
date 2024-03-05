@@ -1,22 +1,84 @@
 package com.jaynius.psvm.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Data
 public class PsVehicle {
 	@Id
+	@Column(name="vehicle_registration")
 	private String vRegNo;
 	private String logbookNumber,chasisNumber,engineNumber,engineCapacity,
 	bodyType,makeOfVehicle,caveat,color;
 	private LocalDate yearOfManufacture;
+	
+	@OneToOne(mappedBy="vehicle")
+	private Drivers driver;
+	
+	@OneToOne(mappedBy="vehicle")
+	private Conductors conductor;
+	
+	@OneToMany(mappedBy="vehicle")
+	private List<EmmissionInspection> emmissionsInspection;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="vehicle")
+	private List<Insurance> insurance;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="vehicle")
+	private List<LoadCrgoInspection> lcInspection;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="vehicle")
+	private List<MechanicalInspection> mechInspec;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="vehicle")
+	private List<StructureInspection> structInspec;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="vehicle")
+	private List<SafetyInspection> safetInspection;	
+	
+
+	@ManyToMany(mappedBy="vehicles")
+	private List<Users> users;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="fk_sacco_id", referencedColumnName="sacco_id")
+	private Saccos sacco;
+	
+	@OneToOne(mappedBy="vehicle")
+	private Trackers tracker;
+	
+	@ManyToMany(mappedBy="vehicle")
+	private List<Owners> owners;
+	
+//	@ManyToMany(mappedBy="vehicle_registration")
+//	private List<Police> officers;
+//	
 	public String getvRegNo() {
 		return vRegNo;
 	}
@@ -77,6 +139,25 @@ public class PsVehicle {
 	public void setYearOfManufacture(LocalDate yearOfManufacture) {
 		this.yearOfManufacture = yearOfManufacture;
 	}
+	public Drivers getDriver() {
+		return driver;
+	}
+	public void setDriver(Drivers driver) {
+		this.driver = driver;
+	}
+	public Conductors getConductor() {
+		return conductor;
+	}
+	public void setConductor(Conductors conductor) {
+		this.conductor = conductor;
+	}
+	public Trackers getTracker() {
+		return tracker;
+	}
+	public void setTracker(Trackers tracker) {
+		this.tracker = tracker;
+	}
+	
 
 		
 
