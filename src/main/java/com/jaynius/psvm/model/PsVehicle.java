@@ -142,21 +142,44 @@ public class PsVehicle {
 	public Drivers getDriver() {
 		return driver;
 	}
-	public void setDriver(Drivers driver) {
-		this.driver = driver;
-	}
+	
 	public Conductors getConductor() {
 		return conductor;
 	}
-	public void setConductor(Conductors conductor) {
-		this.conductor = conductor;
-	}
+
+	
 	public Trackers getTracker() {
 		return tracker;
 	}
-	public void setTracker(Trackers tracker) {
-		this.tracker = tracker;
+	public List<EmmissionInspection> getEmmissionsInspection() {
+		return emmissionsInspection;
 	}
+	public List<Insurance> getInsurance() {
+		return insurance;
+	}
+	public List<LoadCrgoInspection> getLcInspection() {
+		return lcInspection;
+	}
+	public List<MechanicalInspection> getMechInspec() {
+		return mechInspec;
+	}
+	public List<StructureInspection> getStructInspec() {
+		return structInspec;
+	}
+	public List<SafetyInspection> getSafetInspection() {
+		return safetInspection;
+	}
+	public List<Users> getUsers() {
+		return users;
+	}
+	public Saccos getSacco() {
+		return sacco;
+	}
+	public List<Owners> getOwners() {
+		return owners;
+	}
+	
+	
 	
 
 		

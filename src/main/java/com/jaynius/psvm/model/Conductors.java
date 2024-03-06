@@ -31,6 +31,10 @@ public class Conductors {
 	@OneToOne(fetch=FetchType.EAGER)
 	private PsVehicle vehicle;
 
+	public PsVehicle getVehicle() {
+		return vehicle;
+	}
+
 	public String getIdNumber() {
 		return idNumber;
 	}

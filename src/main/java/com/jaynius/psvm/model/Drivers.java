@@ -25,6 +25,8 @@ public class Drivers {
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	private PsVehicle vehicle;
+	
+	
 	public String getIdNumber() {
 		return idNumber;
 	}
@@ -58,9 +60,11 @@ public class Drivers {
 	public PsVehicle getVehicle() {
 		return vehicle;
 	}
-	public void setVehicle(PsVehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setVehicle(PsVehicle vehicle2) {
+		// TODO Auto-generated method stub
+		
 	}
+	
 	
 	
 	
