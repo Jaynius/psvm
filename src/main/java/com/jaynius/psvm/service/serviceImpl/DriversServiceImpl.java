@@ -24,12 +24,14 @@ public class DriversServiceImpl implements DriversService {
 
 	@Override
 	public ResponseEntity<Drivers> addDriver(Drivers driver) {
+		@SuppressWarnings("null")
 		Drivers newDriver=repository.save(driver);
 		return new ResponseEntity<>(newDriver,HttpStatus.CREATED);
 	}
 
 	@Override
 	public ResponseEntity<Drivers> getDriverById(String idNumber) {
+		@SuppressWarnings("null")
 		Optional<Drivers> driver=repository.findById(idNumber);
 		if(driver.isPresent()) {
 			return new ResponseEntity<>(driver.get(),HttpStatus.FOUND);
