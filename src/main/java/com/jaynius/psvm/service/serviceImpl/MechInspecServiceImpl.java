@@ -1,5 +1,7 @@
 package com.jaynius.psvm.service.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -27,16 +29,18 @@ public class MechInspecServiceImpl implements MechInspecService{
         throw new UnsupportedOperationException("Unimplemented method 'updateInspectionById'");
     }
 
-    @Override
-    public ResponseEntity<MechanicalInspection> getAllInspectio() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllInspectio'");
-    }
+  
 
     @Override
     public ResponseEntity<MechanicalInspection> deleteById(Long inspectionId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+    }
+
+    @Override
+    public ResponseEntity<List<MechanicalInspection>> getAllInspection() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllInspection'");
     }
     
 }

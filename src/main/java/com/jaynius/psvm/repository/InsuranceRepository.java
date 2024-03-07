@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.jaynius.psvm.model.Insurance;
 
 @Repository
-public interface InsuranceRepository extends JpaRepository<Insurance,Long> {
+public interface InsuranceRepository extends JpaRepository<Insurance,String> {
     
 }
