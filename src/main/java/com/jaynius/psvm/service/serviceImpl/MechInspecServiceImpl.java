@@ -1,10 +1,12 @@
 package com.jaynius.psvm.service.serviceImpl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import com.jaynius.psvm.model.MechanicalInspection;
 import com.jaynius.psvm.service.MechInspecService;
 
+@Component
 public class MechInspecServiceImpl implements MechInspecService{
 
     @Override

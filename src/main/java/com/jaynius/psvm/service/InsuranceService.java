@@ -11,10 +11,10 @@ import com.jaynius.psvm.model.Insurance;
 @Service
 public interface InsuranceService {
     public ResponseEntity<Insurance> addPolicy(Insurance newInsurance);
-	public ResponseEntity<Insurance> getPolicyById(Long policyNumber);
+	public ResponseEntity<Insurance> getPolicyById(String policyNumber);
 	public ResponseEntity<List<Insurance>> getAllPolicy();
-	public ResponseEntity<Drivers> updatePolicyId(String idNumber,Drivers driver);
-	public ResponseEntity<Drivers> deletePolicyId(Long policyNumber);
+	public ResponseEntity<Insurance> updatePolicyId(Insurance insurance,String policyNumber);
+	public ResponseEntity<Insurance> deletePolicyId(String policyNumber);
 
     
 }

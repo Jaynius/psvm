@@ -3,10 +3,12 @@ package com.jaynius.psvm.service.serviceImpl;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import com.jaynius.psvm.model.SafetyInspection;
 import com.jaynius.psvm.service.SafetyInspecService;
 
+@Component
 public class SafetyInspecServiceImpl implements SafetyInspecService {
 
     @Override

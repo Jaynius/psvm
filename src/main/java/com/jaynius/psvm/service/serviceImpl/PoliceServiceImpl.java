@@ -3,10 +3,12 @@ package com.jaynius.psvm.service.serviceImpl;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import com.jaynius.psvm.model.Police;
 import com.jaynius.psvm.service.PoliceService;
 
+@Component
 public class PoliceServiceImpl implements PoliceService{
 
     @Override

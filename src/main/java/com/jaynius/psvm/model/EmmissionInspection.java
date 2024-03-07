@@ -20,8 +20,6 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Data
 public class EmmissionInspection {
 	@Id
@@ -34,38 +32,40 @@ public class EmmissionInspection {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_vehicle_registration", referencedColumnName="vehicle_registration")
 	private PsVehicle vehicle;
-	
-	public PsVehicle getVehicle() {
-		return vehicle;
-	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+
 	public boolean isExhaustControl() {
 		return exhaustControl;
 	}
+
 	public void setExhaustControl(boolean exhaustControl) {
 		this.exhaustControl = exhaustControl;
 	}
+
 	public boolean isExhaustEmmissions() {
 		return exhaustEmmissions;
 	}
+
 	public void setExhaustEmmissions(boolean exhaustEmmissions) {
 		this.exhaustEmmissions = exhaustEmmissions;
-		
 	}
-	
-	
+
 	public LocalDate getDateOfInspectio() {
 		return dateOfInspectio;
 	}
+
 	public void setDateOfInspectio(LocalDate dateOfInspectio) {
 		this.dateOfInspectio = dateOfInspectio;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public PsVehicle getVehicle() {
+		return vehicle;
+	}
+
+	
 	
 
 }

@@ -3,10 +3,12 @@ package com.jaynius.psvm.service.serviceImpl;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 
 import com.jaynius.psvm.model.LoadCrgoInspection;
 import com.jaynius.psvm.service.LcInsepctionService;
 
+@Component
 public class LcInspectionServiceImpl implements LcInsepctionService {
 
     @Override
