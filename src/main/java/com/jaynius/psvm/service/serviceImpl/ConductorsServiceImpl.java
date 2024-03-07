@@ -27,6 +27,7 @@ public class ConductorsServiceImpl implements ConductorsService{
 
 	@Override
 	public ResponseEntity<Conductors> addConductor(Conductors conductor) {
+		@SuppressWarnings("null")
 		Conductors savedConductor=repo.save(conductor);
 		
 		return new ResponseEntity<>(savedConductor,HttpStatus.CREATED);

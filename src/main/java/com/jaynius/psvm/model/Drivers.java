@@ -3,7 +3,6 @@ package com.jaynius.psvm.model;
 import java.sql.Blob;
 import java.util.Date;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;

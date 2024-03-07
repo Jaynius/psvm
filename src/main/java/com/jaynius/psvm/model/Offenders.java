@@ -1,7 +1,5 @@
 package com.jaynius.psvm.model;
 
-import java.sql.Driver;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

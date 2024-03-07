@@ -9,10 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
@@ -24,7 +21,7 @@ public  class Users {
 	private String firstName,lastName;
 	private String email;
 	private String contacts;
-	private Blob picture;
+
 	
 	@ManyToMany
 	@JoinTable(
@@ -71,14 +68,6 @@ public  class Users {
 
 	public void setContacts(String contacts) {
 		this.contacts = contacts;
-	}
-
-	public Blob getPicture() {
-		return picture;
-	}
-
-	public void setPicture(Blob picture) {
-		this.picture = picture;
 	}
 
 	public List<PsVehicle> getVehicles() {

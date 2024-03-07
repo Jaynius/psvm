@@ -1,8 +1,11 @@
 package com.jaynius.psvm.service.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -23,33 +26,51 @@ public class InsuranceServiceImpl implements InsuranceService{
 
 	@Override
 	public ResponseEntity<Insurance> addPolicy(Insurance newInsurance) {
-		// TODO Auto-generated method stub
-		return null;
+		Insurance policy=repository.save(newInsurance);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 
 	@Override
 	public ResponseEntity<List<Insurance>> getAllPolicy() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Insurance> insuranceList=new ArrayList<>();
+		repository.findAll().forEach(insuranceList::add);
+		if(insuranceList.isEmpty()){
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(insuranceList,HttpStatus.FOUND);
 	}
 
 	@Override
 	public ResponseEntity<Insurance> updatePolicyId(Insurance insurance, String policyNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Insurance> existInsurance=repository.findById(policyNumber);
+		if(existInsurance.isPresent()){
+			Insurance updatedInsurance=existInsurance.get();
+			updatedInsurance.setPolicyNumber(insurance.getPolicyNumber());
+			updatedInsurance.setProvider(insurance.getProvider());
+			updatedInsurance.setExpiry(insurance.getExpiry());
+			updatedInsurance.setVehicle(insurance.getVehicle());
+			Insurance insuranceObj=repository.save(updatedInsurance);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
 	}
 
 	@Override
 	public ResponseEntity<Insurance> deletePolicyId(String policyNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Insurance> insurance=repository.findById(policyNumber);
+		if(insurance.isPresent()){
+			repository.deleteById(policyNumber);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
 	}
 
 	@Override
 	public ResponseEntity<Insurance> getPolicyById() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getPolicyById'");
+	return null;
 	}
 
     
