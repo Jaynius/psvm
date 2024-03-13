@@ -65,6 +65,9 @@ public class Owners  {
 	public void setPicture(Blob picture) {
 		this.picture = picture;
 	}
+	public void setVehicle(List<PsVehicle> vehicle) {
+		this.vehicle = vehicle;
+	}
 	
 	
 }
