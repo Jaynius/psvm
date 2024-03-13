@@ -1,14 +1,9 @@
 package com.jaynius.psvm.service.serviceImpl;
 
-import java.sql.Driver;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
 import com.jaynius.psvm.model.Conductors;
 import com.jaynius.psvm.model.Drivers;
 import com.jaynius.psvm.model.EmmissionInspection;
@@ -22,6 +17,7 @@ import com.jaynius.psvm.model.Saccos;
 import com.jaynius.psvm.model.SafetyInspection;
 import com.jaynius.psvm.model.StructureInspection;
 import com.jaynius.psvm.model.Trackers;
+import com.jaynius.psvm.model.Users;
 import com.jaynius.psvm.repository.ConductorsRepository;
 import com.jaynius.psvm.repository.DriversRepository;
 import com.jaynius.psvm.repository.EmmissionsInspecRepository;
@@ -150,17 +146,94 @@ public class AssociationsServiceImpl implements AssociationService{
     }
 
     @Override
+    @Transactional
     public void assignConductorsToVehicles(Conductors conductor, String conductorId, PsVehicle vehicle, String vRegNo) {
     Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegNo);
     Optional<Conductors> existingConductor=conductorRepository.findById(conductorId);
     if(existingConductor.isPresent()&&existingVehicle.isPresent()){
         PsVehicle setVehicle=existingVehicle.get();
         setVehicle.setConductor(conductor);
+        vehicleRepository.save(setVehicle);
     }
     new RuntimeException("not found");
     }
 
-    
+    @Override
+    public void assignVehiclesToSaccos(PsVehicle vehicle,String vRegno,Saccos sacco, String saccoId) {
+        Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegno);
+        Saccos existingSacco=saccosRepositoiry.getById(null);
+
+    }
+
+    @Override
+    @Transactional
+    public void assignOffenderToOffence(Offenders offender, Long offenderId, Drivers driver, String driverId,
+            Conductors conductor, String conductorId, PsVehicle vehicle, String vRegno) {
+                Optional<Offenders> existingOffender=offendersRepository.findById(offenderId);
+                Optional<Drivers> existingDriver=driversRepository.findById(conductorId);
+                Optional<Conductors> existingConductor=conductorRepository.findById(conductorId);
+                Optional<PsVehicle> existingVehicle=vehicleRepository.findById(conductorId);
+                if (existingConductor.isPresent()&&existingDriver.isPresent()&&existingOffender.isPresent()&&existingVehicle.isPresent()) {
+                    Offenders setOffender=existingOffender.get();
+                    setOffender.setConductor(conductor);
+                    setOffender.setDriver(driver);
+                    setOffender.setVehicle(vehicle);
+                    offendersRepository.save(setOffender);
+                }
+            }
+
+    @Override
+    public void assignLoardCargoInspecToVehicle(LoadCrgoInspection inspection, Long inspectionId, PsVehicle vehicle,
+            String vRegno) {
+        Optional<LoadCrgoInspection> existingInspection=loadInspectionRepository.findById(inspectionId);
+        Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegno);
+        if (existingInspection.isPresent()&&existingVehicle.isPresent()) {
+            PsVehicle setVehicle=existingVehicle.get();
+            setVehicle.setLcInspection((List<LoadCrgoInspection>) inspection);
+            vehicleRepository.save(setVehicle);
+            
+        }
+    }
+
+    @Override
+    public void assignMechinspecToVehicle(MechanicalInspection inspection, Long inspectionId, PsVehicle vehicle,
+            String vRegNo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignMechinspecToVehicle'");
+    }
+
+    @Override
+    public void assignEmmissionToVehicle(EmmissionInspection inspection, Long inspectionId, PsVehicle vehicle,
+            String vRegNo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignEmmissionToVehicle'");
+    }
+
+    @Override
+    public void assignSafetyInspection(SafetyInspection inspection, Long inspectionId, PsVehicle vehicle,
+            String vRegNo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignSafetyInspection'");
+    }
+
+    @Override
+    public void assignStructIsnpecToVehicle(StructureInspection inspection, Long inspectionId, PsVehicle vehicle,
+            String vRegno) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignStructIsnpecToVehicle'");
+    }
+
+    @Override
+    public void assignTrackerToVehicle(Trackers tracker, String trackerId, PsVehicle vehicle, String vRegNo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignTrackerToVehicle'");
+    }
+
+    @Override
+    public void assignUserToVehicle(Users user, String userId, PsVehicle vehicle, String vRegNo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'assignUserToVehicle'");
+    }
 
 
     

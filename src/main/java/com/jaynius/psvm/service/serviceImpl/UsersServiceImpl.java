@@ -25,7 +25,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public ResponseEntity<Users> addUsers(Users newUser) {
-        Users user=repository.save(newUser);
+        repository.save(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -40,6 +40,7 @@ public class UsersServiceImpl implements UsersService {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Users> updateById(Users user, String idNumber) {
         Optional<Users> existingUser=repository.findById(idNumber);
@@ -50,7 +51,7 @@ public class UsersServiceImpl implements UsersService {
             updatedUser.setEmail(user.getEmail());
             updatedUser.setContacts(user.getContacts());
 
-            Users userObj=repository.save(updatedUser);
+            repository.save(updatedUser);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
