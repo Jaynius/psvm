@@ -48,6 +48,9 @@ public class Saccos {
 	public void setRegion(String region) {
 		this.region = region;
 	}
+	public void setVehicles(List<PsVehicle> vehicles) {
+		this.vehicles = vehicles;
+	}
 
 	
 	

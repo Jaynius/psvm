@@ -1,9 +1,5 @@
 package com.jaynius.psvm.service;
 
-import java.sql.Driver;
-
-import org.apache.catalina.User;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.jaynius.psvm.model.Conductors;
@@ -14,11 +10,13 @@ import com.jaynius.psvm.model.LoadCrgoInspection;
 import com.jaynius.psvm.model.MechanicalInspection;
 import com.jaynius.psvm.model.Offenders;
 import com.jaynius.psvm.model.Owners;
+import com.jaynius.psvm.model.Police;
 import com.jaynius.psvm.model.PsVehicle;
 import com.jaynius.psvm.model.Saccos;
 import com.jaynius.psvm.model.SafetyInspection;
 import com.jaynius.psvm.model.StructureInspection;
 import com.jaynius.psvm.model.Trackers;
+import com.jaynius.psvm.model.Users;
 
 @Service
 public interface AssociationService {
@@ -26,14 +24,15 @@ public interface AssociationService {
     public void assignDriversToVehicles(Drivers driver,String driverId,PsVehicle vehicle,String vRegNo);
     public void assignInsuranceToVehicles( Insurance insurance,String policynumber,PsVehicle vehicle,String vRegNo);
     public void assignConductorsToVehicles(Conductors conductor, String conductorId,PsVehicle vehicle,String vRegNo);
-    // public void assignVehiclesToSaccos(String vRegno,String saccoId);
-    // public void assignOffenderToOffence(Long offenderId,String driverId,String conductorId,String vRegno);
-    // public void assignLoardCargoInspecToVehicle(Long inspectionId,String vRegno);
-    // public void assignMechinspecToVehicle(Long inspectionId,String  vRegNo);
-    // public void assignEmmissionToVehicle(Long inspectionId, String vRegNo);
-    // public void assignSafetyInspection(Long inspectionId, String vRegNo);
-    // public void assignStructIsnpecToVehicle(Long inspectionId,String vRegno);
-    // public void assignTrackerToVehicle(String trackerId, String vRegNo);
-    // public void assignUserToVehicle(String userId,String vRegNo);
+    public void assignVehiclesToSaccos(PsVehicle vehicle,String vRegno,Saccos sacco,Long saccoId);
+    public void assignOffenderToOffence(Offenders offender,Long offenderId,Drivers driver ,String driverId,Conductors conductor,String conductorId,PsVehicle vehicle,String vRegno);
+    public void assignLoardCargoInspecToVehicle(LoadCrgoInspection inspection, Long inspectionId,PsVehicle vehicle,String vRegno);
+    public void assignMechinspecToVehicle(MechanicalInspection inspection,Long inspectionId,PsVehicle vehicle,String  vRegNo);
+    public void assignEmmissionToVehicle(EmmissionInspection inspection,Long inspectionId, PsVehicle vehicle,String vRegNo);
+    public void assignSafetyInspection(SafetyInspection inspection,Long inspectionId,PsVehicle vehicle, String vRegNo);
+    public void assignStructIsnpecToVehicle(StructureInspection inspection,Long inspectionId,PsVehicle vehicle,String vRegno);
+    public void assignTrackerToVehicle(Trackers tracker,String trackerId, PsVehicle vehicle,String vRegNo);
+    public void assignUserToVehicle(Users user,String userId,PsVehicle vehicle,String vRegNo);
+    public void assignPoliceToVehicle(Police police,String badgeNumber,PsVehicle vehicle,String vRegNo);
 
 }

@@ -24,9 +24,10 @@ public class InsuranceServiceImpl implements InsuranceService{
 		this.repository = repository;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<Insurance> addPolicy(Insurance newInsurance) {
-		Insurance policy=repository.save(newInsurance);
+		repository.save(newInsurance);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
@@ -43,6 +44,7 @@ public class InsuranceServiceImpl implements InsuranceService{
 
 	@Override
 	public ResponseEntity<Insurance> updatePolicyId(Insurance insurance, String policyNumber) {
+		@SuppressWarnings("null")
 		Optional<Insurance> existInsurance=repository.findById(policyNumber);
 		if(existInsurance.isPresent()){
 			Insurance updatedInsurance=existInsurance.get();
@@ -50,13 +52,14 @@ public class InsuranceServiceImpl implements InsuranceService{
 			updatedInsurance.setProvider(insurance.getProvider());
 			updatedInsurance.setExpiry(insurance.getExpiry());
 			updatedInsurance.setVehicle(insurance.getVehicle());
-			Insurance insuranceObj=repository.save(updatedInsurance);
+			repository.save(updatedInsurance);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<Insurance> deletePolicyId(String policyNumber) {
 		Optional<Insurance> insurance=repository.findById(policyNumber);

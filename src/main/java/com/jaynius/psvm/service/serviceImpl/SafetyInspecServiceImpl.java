@@ -24,15 +24,17 @@ public class SafetyInspecServiceImpl implements SafetyInspecService {
         this.respository = respository;
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<SafetyInspection> addInspection(SafetyInspection newInspection) {
-      SafetyInspection inspection=respository.save(newInspection);
+      respository.save(newInspection);
       return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<SafetyInspection> getInspectionById(Long inspectionId) {
-       Optional<SafetyInspection> inspection=respository.findById(inspectionId);
+       @SuppressWarnings("null")
+    Optional<SafetyInspection> inspection=respository.findById(inspectionId);
        if(inspection.isPresent()){
         return new ResponseEntity<>(inspection.get(),HttpStatus.FOUND);
        }
@@ -58,6 +60,7 @@ public class SafetyInspecServiceImpl implements SafetyInspecService {
         return new ResponseEntity<>(inspections,HttpStatus.FOUND);
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<SafetyInspection> deleteById(Long inspectionId) {
         Optional<SafetyInspection> inspection=respository.findById(inspectionId);

@@ -12,6 +12,7 @@ import com.jaynius.psvm.model.LoadCrgoInspection;
 import com.jaynius.psvm.model.MechanicalInspection;
 import com.jaynius.psvm.model.Offenders;
 import com.jaynius.psvm.model.Owners;
+import com.jaynius.psvm.model.Police;
 import com.jaynius.psvm.model.PsVehicle;
 import com.jaynius.psvm.model.Saccos;
 import com.jaynius.psvm.model.SafetyInspection;
@@ -103,6 +104,7 @@ public class AssociationsServiceImpl implements AssociationService{
         this.insuranceRepository=insuranceRepository;
     }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
     @Transactional
     public void assignVehiclesToOwner(PsVehicle vehicle, Owners owner, String ownerId, String vRegNo) {
@@ -118,6 +120,7 @@ public class AssociationsServiceImpl implements AssociationService{
         }
     }
 
+    @SuppressWarnings("null")
     @Override
     @Transactional
     public void assignDriversToVehicles(Drivers driver, String driverId, PsVehicle vehicle, String vRegNo) {
@@ -131,6 +134,7 @@ public class AssociationsServiceImpl implements AssociationService{
         new RuntimeException("not applicable");
     }
 
+    @SuppressWarnings("null")
     @Override
     @Transactional
     public void assignInsuranceToVehicles(Insurance insurance, String policynumber, PsVehicle vehicle, String vRegNo) {
@@ -145,6 +149,7 @@ public class AssociationsServiceImpl implements AssociationService{
 
     }
 
+    @SuppressWarnings("null")
     @Override
     @Transactional
     public void assignConductorsToVehicles(Conductors conductor, String conductorId, PsVehicle vehicle, String vRegNo) {
@@ -158,13 +163,21 @@ public class AssociationsServiceImpl implements AssociationService{
     new RuntimeException("not found");
     }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
-    public void assignVehiclesToSaccos(PsVehicle vehicle,String vRegno,Saccos sacco, String saccoId) {
+    @Transactional
+    public void assignVehiclesToSaccos(PsVehicle vehicle,String vRegno,Saccos sacco, Long saccoId) {
         Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegno);
-        Saccos existingSacco=saccosRepositoiry.getById(null);
+        Optional<Saccos> existingSacco=saccosRepositoiry.findById(saccoId);
+        if (existingSacco.isPresent()&&existingVehicle.isPresent()) {
+            Saccos setSacco=existingSacco.get();
+            setSacco.setVehicles((List<PsVehicle>) vehicle);
+            
+        }
 
     }
 
+    @SuppressWarnings("null")
     @Override
     @Transactional
     public void assignOffenderToOffence(Offenders offender, Long offenderId, Drivers driver, String driverId,
@@ -180,9 +193,12 @@ public class AssociationsServiceImpl implements AssociationService{
                     setOffender.setVehicle(vehicle);
                     offendersRepository.save(setOffender);
                 }
+                new RuntimeException("not found");
             }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
+    @Transactional
     public void assignLoardCargoInspecToVehicle(LoadCrgoInspection inspection, Long inspectionId, PsVehicle vehicle,
             String vRegno) {
         Optional<LoadCrgoInspection> existingInspection=loadInspectionRepository.findById(inspectionId);
@@ -191,48 +207,118 @@ public class AssociationsServiceImpl implements AssociationService{
             PsVehicle setVehicle=existingVehicle.get();
             setVehicle.setLcInspection((List<LoadCrgoInspection>) inspection);
             vehicleRepository.save(setVehicle);
-            
         }
+        new RuntimeException("not found");
     }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
+    @Transactional
     public void assignMechinspecToVehicle(MechanicalInspection inspection, Long inspectionId, PsVehicle vehicle,
             String vRegNo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignMechinspecToVehicle'");
+                Optional<MechanicalInspection> existingInspection=mechInspecRepository.findById(inspectionId);
+                Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegNo);
+                if (existingInspection.isPresent()&&existingVehicle.isPresent()) {
+                    PsVehicle setVehicle=existingVehicle.get();
+                    setVehicle.setMechInspec((List<MechanicalInspection>) inspection);
+                    vehicleRepository.save(setVehicle);
+                    
+                }
+                new RuntimeException("not applicable");
     }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
+    @Transactional
     public void assignEmmissionToVehicle(EmmissionInspection inspection, Long inspectionId, PsVehicle vehicle,
             String vRegNo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignEmmissionToVehicle'");
+                Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegNo);
+                Optional<EmmissionInspection> existingInspection=emmissionsInspecRepository.findById(inspectionId);
+                if (existingInspection.isPresent()&&existingVehicle.isPresent()) {
+                    PsVehicle setVehicle=existingVehicle.get();
+                    setVehicle.setEmmissionsInspection((List<EmmissionInspection>) inspection);
+                    vehicleRepository.save(setVehicle);
+
+                }
+                new RuntimeException("not found");
+
     }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
+    @Transactional
     public void assignSafetyInspection(SafetyInspection inspection, Long inspectionId, PsVehicle vehicle,
             String vRegNo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignSafetyInspection'");
+                Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegNo);
+                Optional<SafetyInspection> existingInspection=safetyInspeRespository.findById(inspectionId);
+                if (existingInspection.isPresent()&&existingVehicle.isPresent()) {
+                    PsVehicle setVehicle=existingVehicle.get();
+                    setVehicle.setSafetInspection((List<SafetyInspection>) inspection);
+                    vehicleRepository.save(setVehicle);
+
+                }
+                new RuntimeException("not found");
+
     }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
+    @Transactional
     public void assignStructIsnpecToVehicle(StructureInspection inspection, Long inspectionId, PsVehicle vehicle,
             String vRegno) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignStructIsnpecToVehicle'");
+                Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegno);
+                Optional<StructureInspection> exInspection=structureInspecRepository.findById(inspectionId);
+                if(existingVehicle.isPresent()&&exInspection.isPresent()){
+                    PsVehicle setVehicle=existingVehicle.get();
+                    setVehicle.setStructInspec((List<StructureInspection>) inspection);
+                    vehicleRepository.save(setVehicle);
+                }
+                new RuntimeException("not found");
+        
     }
 
+    @SuppressWarnings("null")
     @Override
+    @Transactional
     public void assignTrackerToVehicle(Trackers tracker, String trackerId, PsVehicle vehicle, String vRegNo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignTrackerToVehicle'");
+        Optional<Trackers> existingTracker=trackersRepository.findById(trackerId);
+        Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegNo);
+        if (existingTracker.isPresent()&&existingVehicle.isPresent()) {
+            PsVehicle setVehicle=existingVehicle.get();
+            setVehicle.setTracker(tracker);
+            vehicleRepository.save(setVehicle);
+            
+        }
+        new RuntimeException("not found");
     }
 
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
+    @Transactional
     public void assignUserToVehicle(Users user, String userId, PsVehicle vehicle, String vRegNo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignUserToVehicle'");
+        Optional<Users> existingUser=usersRepository.findById(userId);
+        Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegNo);
+        if (existingUser.isPresent()&&existingVehicle.isPresent()) {
+            PsVehicle setVehicle=existingVehicle.get();
+            setVehicle.setUsers((List<Users>) user);
+            
+        }
+        new RuntimeException("not found");
+    }
+
+    @SuppressWarnings({ "unchecked", "null" })
+    @Override
+    @Transactional
+    public void assignPoliceToVehicle(Police police, String badgeNumber, PsVehicle vehicle, String vRegNo) {
+        Optional<PsVehicle> existingVehicle=vehicleRepository.findById(vRegNo);
+        Optional<Police> existingPolice=policeRepository.findById(badgeNumber);
+        if (existingPolice.isPresent()&&existingVehicle.isPresent()) {
+            PsVehicle setVehicle=existingVehicle.get();
+            setVehicle.setOfficers((List<Police>) police);
+            vehicleRepository.save(setVehicle);
+            
+            
+        }
     }
 
 

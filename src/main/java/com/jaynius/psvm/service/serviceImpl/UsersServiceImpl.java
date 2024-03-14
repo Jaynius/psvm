@@ -23,6 +23,7 @@ public class UsersServiceImpl implements UsersService {
         this.repository = repository;
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Users> addUsers(Users newUser) {
         repository.save(newUser);
@@ -68,6 +69,7 @@ public class UsersServiceImpl implements UsersService {
         
     }
 
+    @SuppressWarnings("null")
     @Override
     public ResponseEntity<Users> deleteUserById(String idNumber) {
         

@@ -33,6 +33,7 @@ public class ConductorsServiceImpl implements ConductorsService{
 		return new ResponseEntity<>(savedConductor,HttpStatus.CREATED);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<Conductors> updateById(String idNumber, Conductors newConductor) {
 		Optional<Conductors> existingConductor=repo.findById(idNumber);
@@ -60,6 +61,7 @@ public class ConductorsServiceImpl implements ConductorsService{
 	
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<Conductors> findById(String idNumber) {
 		// TODO Auto-generated method stub
@@ -73,6 +75,7 @@ public class ConductorsServiceImpl implements ConductorsService{
 		}
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<Conductors> deleteById(String idNumber) {
 		 Optional<Conductors> conductorOptional = repo.findById(idNumber);

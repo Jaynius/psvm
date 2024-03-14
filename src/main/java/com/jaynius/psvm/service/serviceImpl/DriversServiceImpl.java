@@ -50,6 +50,7 @@ public class DriversServiceImpl implements DriversService {
 		return new ResponseEntity<>(driverList,HttpStatus.OK);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<Drivers> updateDriverById(String idNumber, Drivers driver) {
 		Optional<Drivers> existingDriver=repository.findById(idNumber);
@@ -62,12 +63,13 @@ public class DriversServiceImpl implements DriversService {
 			updatedDriver.setPicture(driver.getPicture());
 			updatedDriver.setVehicle(driver.getVehicle());
 			
-			Drivers driverObj=repository.save(updatedDriver);
+			repository.save(updatedDriver);
 			return new ResponseEntity<>(updatedDriver,HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<Drivers> deleteById(String idNumber) {
 		Optional<Drivers> driver=repository.findById(idNumber);

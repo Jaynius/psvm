@@ -76,9 +76,9 @@ public class PsVehicle {
 	@ManyToMany(mappedBy="vehicle")
 	private List<Owners> owners;
 	
-//	@ManyToMany(mappedBy="vehicle_registration")
-//	private List<Police> officers;
-//	
+	@ManyToMany(mappedBy="vehicles")
+	private List<Police> officers;
+	
 	public String getvRegNo() {
 		return vRegNo;
 	}
@@ -177,6 +177,10 @@ public class PsVehicle {
 	}
 	public List<Owners> getOwners() {
 		return owners;
+	}
+
+	public List<Police> getOfficers(){
+		return officers;
 	}
 	
 	

@@ -21,12 +21,14 @@ public class EmmissionInspectionServiceImpl implements EmmissionInspectionServic
 		this.repository = repository;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<EmmissionInspection> addInspection(EmmissionInspection inspection) {
 		EmmissionInspection newInspection=repository.save(inspection);
 		return new ResponseEntity<>(newInspection,HttpStatus.CREATED);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<EmmissionInspection> getInspectionById(Long inspecionId) {
 		Optional<EmmissionInspection> existingInspection=repository.findById(inspecionId);
@@ -36,6 +38,7 @@ public class EmmissionInspectionServiceImpl implements EmmissionInspectionServic
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<EmmissionInspection> updateInspectionById(EmmissionInspection inspection, Long inspecionId) {
 		Optional<EmmissionInspection> inspectionToUpdate=repository.findById(inspecionId);
@@ -57,6 +60,7 @@ public class EmmissionInspectionServiceImpl implements EmmissionInspectionServic
 		return new ResponseEntity<>(inspectionList,HttpStatus.OK);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public ResponseEntity<EmmissionInspection> deleteInspection(Long inspecionId) {
 		Optional<EmmissionInspection> inspection=repository.findById(inspecionId);
